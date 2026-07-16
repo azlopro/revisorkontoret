@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    {{ $fdr := partialCached "fdr-feed.html" "fdr" }}
+    {{ $egne := .Pages.ByDate.Reverse }}
+
+    {{ if $fdr }}
+    <div class="konto-head"><span class="nr">01</span><h2>Aktuelt fra FDR</h2></div>
+    <p class="kilde-note">Nyheder fra Foreningen Danske Revisorer, som vi er medlem af. Artiklerne åbner på fdr.dk.</p>
+    <div class="nyheds-liste">
+      {{ range $fdr }}
+      <article class="nyhed-kort">
+        <span class="dato">{{ .post_date }}</span>
+        <h2><a href="{{ .post_link }}" target="_blank" rel="noopener">{{ .post_title }}</a></h2>
+        <p>{{ .post_excerpt | plainify | truncate 220 }}</p>
+        <a class="mere" href="{{ .post_link }}" target="_blank" rel="noopener">Læs hos FDR →</a>
+      </article>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{ if $egne }}
+    <div class="konto-head nyheds-afsnit"><span class="nr">{{ if $fdr }}02{{ else }}01{{ end }}</span><h2>Nyt fra kontoret</h2></div>
+    <div class="nyheds-liste">
+      {{ range $egne }}
+      <article class="nyhed-kort">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p>{{ .Summary | plainify | truncate 200 }}</p>
+        <a class="mere" href="{{ .RelPermalink }}">Læs hele nyheden →</a>
+      </article>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{ if and (not $fdr) (not $egne) }}
+    <p class="ingen-nyheder">Der er ingen nyheder i øjeblikket. Kig forbi igen senere.</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

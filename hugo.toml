@@ -1,0 +1,64 @@
+baseURL = "https://revision-horsens.dk/"
+locale = "da-DK"
+title = "Revisionskontoret i Horsens"
+timeZone = "Europe/Copenhagen"
+
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "rss"]
+
+[params]
+  beskrivelse = "Din lokale revisor i Horsens. Revision, bogføring, regnskab, skat og moms i den hvide villa på Sønderbrogade 43. Etableret 1964."
+  telefon = "75 64 72 22"
+  telefonLink = "+4575647222"
+  email = "mail@revi-horsens.dk"
+  adresse = "Sønderbrogade 43"
+  postnrBy = "8700 Horsens"
+  cvr = "27 60 77 64"
+  bank = "Ringkjøbing Landbobank · Reg. 7670 · Konto 0008930765"
+  etableret = "1964"
+  linkedin = "https://www.linkedin.com/company/revisionskontoret-i-horsens"
+
+[[menus.main]]
+  name = "Om kontoret"
+  pageRef = "/om-kontoret"
+  weight = 10
+
+[[menus.main]]
+  name = "Ydelser"
+  pageRef = "/ydelser"
+  weight = 20
+
+[[menus.main]]
+  name = "Medarbejdere"
+  pageRef = "/medarbejdere"
+  weight = 30
+
+[[menus.main]]
+  name = "Information"
+  pageRef = "/information"
+  weight = 40
+
+[[menus.main]]
+  name = "Nyheder"
+  pageRef = "/nyheder"
+  weight = 45
+
+[[menus.main]]
+  name = "Kontakt"
+  pageRef = "/kontakt"
+  weight = 50
+  [menus.main.params]
+    cta = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[minify.tdewolff.html]
+  keepQuotes = true
+
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"
+
+[sitemap]
+  changefreq = "monthly"

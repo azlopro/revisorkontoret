@@ -1,0 +1,27 @@
+{{- $billede := "" }}{{ with resources.Get "billeder/hus.jpg" }}{{ $billede = .Permalink }}{{ end }}
+{{- $skema := dict
+  "@context" "https://schema.org"
+  "@type" "AccountingService"
+  "@id" (printf "%s#kontoret" site.Home.Permalink)
+  "name" site.Title
+  "description" site.Params.beskrivelse
+  "url" site.Home.Permalink
+  "telephone" (printf "+45 %s" site.Params.telefon)
+  "email" site.Params.email
+  "foundingDate" site.Params.etableret
+  "vatID" "DK27607764"
+  "image" $billede
+  "address" (dict
+    "@type" "PostalAddress"
+    "streetAddress" site.Params.adresse
+    "postalCode" "8700"
+    "addressLocality" "Horsens"
+    "addressCountry" "DK")
+  "openingHoursSpecification" (slice
+    (dict "@type" "OpeningHoursSpecification" "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday") "opens" "09:00" "closes" "17:00")
+    (dict "@type" "OpeningHoursSpecification" "dayOfWeek" "Friday" "opens" "09:00" "closes" "16:30"))
+  "sameAs" (slice site.Params.linkedin)
+  "memberOf" (dict "@type" "Organization" "name" "Foreningen Danske Revisorer" "url" "https://www.fdr.dk")
+  "areaServed" "Horsens og omegn"
+}}
+<script type="application/ld+json">{{ $skema | jsonify | safeJS }}</script>

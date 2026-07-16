@@ -1,0 +1,25 @@
+<footer>
+  <div class="wrap">
+    <div>
+      {{ with resources.Get "billeder/logo-fuld.png" }}<img class="footer-logo" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Revisionskontoret i Horsens, Registrerede revisorer" loading="lazy">{{ end }}
+      <p>{{ site.Params.adresse }} · {{ site.Params.postnrBy }}<br>
+      Telefon: <a href="tel:{{ site.Params.telefonLink }}">{{ site.Params.telefon }}</a><br>
+      E-mail: <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a></p>
+      <p class="cookie"><strong>Cookiepolitik:</strong> Vores hjemmeside indsamler og videregiver ikke data af nogen art. Du behøver derfor hverken acceptere eller afvise cookies. Vælger du selv at få vist kortet fra Google Maps på kontaktsiden, kan Google dog sætte cookies.</p>
+    </div>
+    <div>
+      <h4>Genveje</h4>
+      <p>{{ range site.Menus.main }}<a href="{{ .URL }}">{{ .Name }}</a><br>{{ end }}<a href="{{ (site.GetPage "/persondatapolitik").RelPermalink }}">Persondatapolitik</a></p>
+    </div>
+    <div>
+      <h4>Medlem af</h4>
+      {{ with resources.Get "billeder/fdr-logo.png" }}<img class="fdr-logo" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Foreningen Danske Revisorer" loading="lazy">{{ end }}
+      <p>Foreningen Danske Revisorer (FDR)</p>
+      <p><a href="{{ site.Params.linkedin }}" target="_blank" rel="noopener">Følg os på LinkedIn →</a></p>
+    </div>
+    <div class="footer-bund">
+      <span>© {{ site.Params.etableret }}–{{ now.Year }} Revisionskontoret i Horsens · CVR-nr.: {{ site.Params.cvr }}</span>
+      <a href="#top">Til toppen ↑</a>
+    </div>
+  </div>
+</footer>

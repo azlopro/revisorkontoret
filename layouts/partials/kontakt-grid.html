@@ -1,0 +1,19 @@
+<div class="kontakt-grid">
+  <div class="kontakt-info">
+    <h3>Kom forbi, eller ring</h3>
+    <a class="tel" href="tel:{{ site.Params.telefonLink }}">{{ site.Params.telefon }}</a>
+    <p>{{ site.Params.adresse }} · {{ site.Params.postnrBy }}<br>Parkering i gården, indkørsel fra Jyllandsgade.</p>
+    <p>E-mail: <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a></p>
+    <p><a href="{{ site.Params.linkedin }}" target="_blank" rel="noopener">Følg os på LinkedIn →</a></p>
+    <p class="stille">CVR-nr.: {{ site.Params.cvr }}<br>Bank: {{ site.Params.bank }}</p>
+  </div>
+  <div>
+    <h3>Åbningstider</h3>
+    <table class="tider">
+      {{ range hugo.Data.tider.aabningstider }}
+      <tr><td>{{ .dage }}</td><td>{{ .tid }}</td></tr>
+      {{ end }}
+      <tr class="note"><td colspan="2">{{ hugo.Data.tider.note }}</td></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    <div class="kerne">
+      <p>{{ hugo.Data.ydelser.kerne | markdownify }}</p>
+    </div>
+    <ul class="kontoplan">
+      {{ range hugo.Data.ydelser.liste }}
+      <li id="{{ .anker }}">
+        <div class="linje">
+          <span class="titel">{{ .titel }}</span>
+          <span class="leder"></span>
+          <span class="note">{{ .note }}</span>
+        </div>
+        <p class="beskrivelse">{{ .beskrivelse }}</p>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

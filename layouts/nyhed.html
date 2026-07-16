@@ -1,0 +1,17 @@
+{{ define "main" }}
+<div class="side-hoved">
+  <div class="wrap">
+    <p class="eyebrow"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time></p>
+    <h1>{{ .Title }}</h1>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="prosa">
+      {{ .Content }}
+      <p class="nyhed-tilbage"><a href="{{ .Parent.RelPermalink }}">← Alle nyheder</a></p>
+    </div>
+  </div>
+</section>
+{{ end }}

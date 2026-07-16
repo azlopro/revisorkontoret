@@ -1,0 +1,135 @@
+{{ define "main" }}
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Registreret revisor · Horsens</p>
+      <h1>Revisoren man kan <em>tale med</em> og forstå.</h1>
+      <p>Vi har hjulpet små og mellemstore virksomheder med revision, regnskab og rådgivning siden {{ site.Params.etableret }}. Det hele foregår fra den hvide patriciervilla på Sønderbrogade, lige i hjertet af Horsens. Uden unødige fagudtryk, og uden at det går ud over fagligheden.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="tel:{{ site.Params.telefonLink }}">Ring {{ site.Params.telefon }}</a>
+        <a class="btn btn-ghost" href="{{ (site.GetPage "/ydelser").RelPermalink }}">Se hvad vi hjælper med</a>
+      </div>
+      <div class="hero-fakta">
+        <div><strong>{{ site.Params.etableret }}</strong><span>Etableret i Horsens</span></div>
+        <div><strong>60+ år</strong><span>Erfaring med SMV'er</span></div>
+        <div><strong>3</strong><span>Medarbejdere du kender</span></div>
+      </div>
+    </div>
+    <figure class="hero-foto">
+      {{ partial "billede.html" (dict "src" "hus.jpg" "alt" "Den hvide patriciervilla på Sønderbrogade 43, Horsens" "loading" "eager" "sizes" "(max-width: 860px) 100vw, 50vw") }}
+      <figcaption>Den hvide villa · {{ site.Params.adresse }}, Horsens</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="om" class="s-papir">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">01</span><h2>Din lokale og uformelle revisor</h2></div>
+    <div class="om-grid">
+      <div>
+        <p>Revisionskontoret i Horsens blev etableret helt tilbage i {{ site.Params.etableret }}. Vi beskæftiger i dag tre mand og har primært små og mellemstore virksomheder som kunder.</p>
+        <p>Vi gør meget ud af ikke at bruge for mange fagudtryk, og vores kunder omtaler os ofte som "revisoren man kan tale med og forstå". Vi er samtidig af den overbevisning, at man som revisor i en by som Horsens sagtens kan være yderst professionel, uden at fremstå hverken højtidelig eller formel.</p>
+        <p>Gennem tæt samarbejde og økonomisk sparring med virksomhedens ledelse arbejder vi for at udvikle og forbedre vores kunders forretning, år efter år.</p>
+        <p class="laes-mere"><a href="{{ (site.GetPage "/om-kontoret").RelPermalink }}">Læs mere om kontoret og den hvide villa →</a></p>
+      </div>
+      <aside class="villa-kort">
+        <h3>Den hvide villa: vi har fod på dine tal!</h3>
+        <p>Du finder os i den hvide patriciervilla lige overfor den hvide kirke, med parkering i gården og indkørsel fra Jyllandsgade.</p>
+        <p class="adresse">{{ site.Params.adresse }}<br>{{ site.Params.postnrBy }}</p>
+        <p><a href="https://maps.google.com/?q=S%C3%B8nderbrogade+43,+8700+Horsens" target="_blank" rel="noopener">Vis på kort →</a></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="ydelser">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">02</span><h2>Det hjælper vi med</h2></div>
+    <div class="kerne">
+      <p>{{ hugo.Data.ydelser.kerne | markdownify }}</p>
+    </div>
+    <ul class="kontoplan">
+      {{ range hugo.Data.ydelser.liste }}
+      <li>
+        <div class="linje">
+          <a class="titel" href="{{ (site.GetPage "/ydelser").RelPermalink }}#{{ .anker }}">{{ .titel }}</a>
+          <span class="leder"></span>
+          <span class="note">{{ .note }}</span>
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    <p class="laes-mere"><a href="{{ (site.GetPage "/ydelser").RelPermalink }}">Læs mere om vores ydelser →</a></p>
+  </div>
+</section>
+
+<section id="medarbejdere" class="s-papir">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">03</span><h2>Medarbejdere</h2></div>
+    <p class="citat">"Vi er bedre, end vi ser ud!"</p>
+    <div class="folk">
+      {{ range hugo.Data.medarbejdere }}
+      <article class="person">
+        {{ partial "billede.html" (dict "src" .foto "alt" (printf "%s, %s" .navn (lower .rolle)) "class" "foto" "fill" "640x640") }}
+        <h3>{{ .navn }}</h3>
+        <p class="rolle">{{ .rolle }}</p>
+        <p class="fakta">{{ delimit .fakta " · " }}</p>
+      </article>
+      {{ end }}
+    </div>
+    <p class="laes-mere"><a href="{{ (site.GetPage "/medarbejdere").RelPermalink }}">Mød hele holdet →</a></p>
+  </div>
+</section>
+
+{{ $fdr := partialCached "fdr-feed.html" "fdr" }}
+{{ $nyhedsside := site.GetPage "/nyheder" }}
+{{ if $fdr }}
+<section id="nyheder">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">04</span><h2>Aktuelle nyheder</h2></div>
+    <div class="nyheds-grid">
+      {{ range first 3 $fdr }}
+      <article class="nyhed-kort">
+        <span class="dato">{{ .post_date }}</span>
+        <h3><a href="{{ .post_link }}" target="_blank" rel="noopener">{{ .post_title }}</a></h3>
+        <p>{{ .post_excerpt | plainify | truncate 150 }}</p>
+        <a class="mere" href="{{ .post_link }}" target="_blank" rel="noopener">Læs hos FDR →</a>
+      </article>
+      {{ end }}
+    </div>
+    <p class="laes-mere"><a href="{{ $nyhedsside.RelPermalink }}">Se alle nyheder →</a></p>
+  </div>
+</section>
+{{ else }}
+{{ with $nyhedsside }}
+{{ $poster := .Pages.ByDate.Reverse | first 3 }}
+{{ if $poster }}
+<section id="nyheder">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">04</span><h2>Aktuelle nyheder</h2></div>
+    <div class="nyheds-grid">
+      {{ range $poster }}
+      <article class="nyhed-kort">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Summary | plainify | truncate 140 }}</p>
+        <a class="mere" href="{{ .RelPermalink }}">Læs mere →</a>
+      </article>
+      {{ end }}
+    </div>
+    <p class="laes-mere"><a href="{{ .RelPermalink }}">Se alle nyheder →</a></p>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+{{ end }}
+
+<section id="kontakt" class="kontakt">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">05</span><h2>Kontakt og åbningstider</h2></div>
+    {{ partial "kontakt-grid.html" . }}
+  </div>
+</section>
+
+{{ end }}

@@ -1,0 +1,35 @@
+- titel: Beløbsgrænser og satser
+  under: De mest almindelige satser og beløbsgrænser jvf. SKAT, altid opdaterede hos kilden.
+  links:
+    - tekst: Satser og beløbsgrænser (skat.dk)
+      url: https://skat.dk/hjaelp/satser
+    - tekst: Satser opdelt efter skattelove (skm.dk)
+      url: https://skm.dk/tal-og-metode/satser
+
+- titel: Offentlige instanser
+  under: Direkte adgang til de vigtigste offentlige selvbetjeningsløsninger.
+  links:
+    - tekst: SKAT (TastSelv)
+      url: https://www.skat.dk
+    - tekst: Virk.dk (virksomhedsregistrering)
+      url: https://www.virk.dk
+    - tekst: Erhvervsstyrelsen
+      url: https://www.erhvervsstyrelsen.dk
+    - tekst: OIS (ejendomsoplysninger)
+      url: https://www.ois.dk
+
+- titel: Nyttige links
+  under: Værktøjer og foreninger, vi selv bruger og anbefaler.
+  links:
+    - tekst: e-conomic (online bogføring)
+      url: https://www.e-conomic.dk
+    - tekst: Danløn (lønsystem)
+      url: https://www.danlon.dk
+    - tekst: Nationalbanken (officielle rentesatser)
+      url: https://www.nationalbanken.dk
+    - tekst: Nettoprisindeks (dst.dk)
+      url: https://www.dst.dk/da/Statistik/emner/oekonomi/prisindeks/nettoprisindeks
+    - tekst: Foreningen Danske Revisorer
+      url: https://www.fdr.dk
+    - tekst: Business Horsens
+      url: https://businesshorsens.dk

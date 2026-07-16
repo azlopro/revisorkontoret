@@ -1,0 +1,19 @@
+# Gamle CMS-adresser -> nye sider
+# (/medarbejdere, /nyheder og /persondatapolitik findes stadig som mapper —
+#  CF Pages haandterer trailing slash selv, saa kun .html-varianterne omdirigeres)
+/praesentation* /om-kontoret/ 301
+/kontoret* /om-kontoret/ 301
+/billeder-kontor* /om-kontoret/ 301
+/aabningstider* /kontakt/ 301
+/kort* /kontakt/ 301
+/beloebsgraenser* /information/ 301
+/links* /information/ 301
+/nyheder.html /nyheder/ 301
+/aktuelt* /nyheder/ 301
+/medarbejdere.html /medarbejdere/ 301
+/kasper-enemark.html /medarbejdere/ 301
+/thor-pedersen.html /medarbejdere/ 301
+/christina-enemark.html /medarbejdere/ 301
+/revisor-soeges.html /medarbejdere/ 301
+/persondatapolitik.html /persondatapolitik/ 301
+/information.html /information/ 301

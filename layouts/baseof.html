@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+<a class="skip" href="#hoved">Spring til indhold</a>
+
+<div class="topline" id="top">
+  <div class="wrap">
+    <span>{{ site.Params.adresse }} · {{ site.Params.postnrBy }}</span>
+    <span>Ring: <a href="tel:{{ site.Params.telefonLink }}">{{ site.Params.telefon }}</a></span>
+  </div>
+</div>
+
+<header>
+  <nav aria-label="Hovedmenu">
+    <a class="logo" href="{{ site.Home.RelPermalink }}">
+      {{- with resources.Get "billeder/logo-R.png" }}<img class="logo-r" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">{{ end -}}
+      {{- with resources.Get "billeder/logo-text-only.png" }}<img class="logo-tekst" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Revisionskontoret i Horsens">{{ end -}}
+    </a>
+    <button class="burger" aria-label="Åbn menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <ul class="navlinks" id="menu">
+      {{ range site.Menus.main }}
+      <li><a href="{{ .URL }}"{{ if .Params.cta }} class="nav-cta{{ if $.IsMenuCurrent "main" . }} aktiv{{ end }}"{{ else if $.IsMenuCurrent "main" . }} class="aktiv" aria-current="page"{{ end }}>{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+</header>
+
+<main id="hoved">
+{{ block "main" . }}{{ end }}
+</main>
+
+{{ if not .IsHome }}{{ partial "ring-band.html" . }}{{ end }}
+
+{{ partial "footer.html" . }}
+
+{{ $js := resources.Get "js/menu.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+</body>
+</html>

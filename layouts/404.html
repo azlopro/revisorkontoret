@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="fejlside wrap">
+  <p class="nr404">404</p>
+  <h1>Den konto findes ikke i kontoplanen</h1>
+  <p>Siden, du leder efter, er enten flyttet eller findes ikke længere. Prøv forsiden, eller ring til os, så finder vi ud af det.</p>
+  <div class="hero-actions u-center">
+    <a class="btn btn-primary" href="/">Til forsiden</a>
+    <a class="btn btn-ghost" href="tel:{{ site.Params.telefonLink }}">Ring {{ site.Params.telefon }}</a>
+  </div>
+</div>
+{{ end }}

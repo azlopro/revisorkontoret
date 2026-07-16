@@ -1,0 +1,10 @@
+aabningstider:
+  - dage: Mandag – torsdag
+    tid: 9.00 – 17.00
+  - dage: Fredag
+    tid: 9.00 – 16.30
+  - dage: Telefon (man – fre)
+    tid: 10.00 – 16.00
+note: >
+  Jul og nytår: På almindelige hverdage mellem jul og nytår er der åbent
+  fra kl. 10.00 til 13.00.

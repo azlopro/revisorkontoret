@@ -1,0 +1,37 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">01</span><h2>Din lokale og uformelle revisor</h2></div>
+    <div class="om-grid">
+      <div>
+        <p>Revisionskontoret i Horsens blev etableret helt tilbage i {{ site.Params.etableret }}. Vi beskæftiger i dag tre mand og har primært små og mellemstore virksomheder som kunder.</p>
+        <p>Vi gør meget ud af ikke at bruge for mange fagudtryk, og vores kunder omtaler os ofte som "revisoren man kan tale med og forstå". Vi er samtidig af den overbevisning, at man som revisor i en by som Horsens sagtens kan være yderst professionel, uden at fremstå hverken højtidelig eller formel.</p>
+        <p>Gennem tæt samarbejde og økonomisk sparring med virksomhedens ledelse arbejder vi for at udvikle og forbedre vores kunders forretning, år efter år.</p>
+      </div>
+      <aside class="villa-kort">
+        <h3>Den hvide villa: vi har fod på dine tal!</h3>
+        <p>Du finder os i den hvide patriciervilla lige overfor den hvide kirke, en af byens mest markante ejendomme med facader til både Sønderbrogade, Niels Gyldings Gade og Jyllandsgade. Vi har parkering i gården med indkørsel fra Jyllandsgade.</p>
+        <p>Ejendommen tilhørte tidligere læge Jørgen Nielsby, som drev lægeklinik i tilbygningen. I dag huser tilbygningen en klinik for fodterapi. Deraf kommentaren fra kunderne: "Nu har vi da en revisor i Horsens, som har fod på tallene."</p>
+        <p class="adresse">{{ site.Params.adresse }}<br>{{ site.Params.postnrBy }}</p>
+        <p><a href="https://maps.google.com/?q=S%C3%B8nderbrogade+43,+8700+Horsens" target="_blank" rel="noopener">Vis på kort →</a></p>
+      </aside>
+    </div>
+    <div class="galleri">
+      <figure>
+        {{ partial "billede.html" (dict "src" "hus.jpg" "alt" "Villaen set fra Sønderbrogade" "sizes" "(max-width: 860px) 100vw, 33vw") }}
+        <figcaption>Villaen set fra Sønderbrogade</figcaption>
+      </figure>
+      <figure>
+        {{ partial "billede.html" (dict "src" "hus-indkoersel.jpg" "alt" "Indkørslen til parkering i gården fra Jyllandsgade" "sizes" "(max-width: 860px) 100vw, 33vw") }}
+        <figcaption>Indkørsel til gården fra Jyllandsgade</figcaption>
+      </figure>
+      <figure>
+        {{ partial "billede.html" (dict "src" "hus-bagside.jpg" "alt" "Villaens bagside set fra gården" "sizes" "(max-width: 860px) 100vw, 33vw") }}
+        <figcaption>Bagsiden set fra gården</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+{{ end }}

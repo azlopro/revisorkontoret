@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    <div class="info-grid">
+      {{ range hugo.Data.infolinks }}
+      <div class="info-boks">
+        <h2>{{ .titel }}</h2>
+        <p class="under">{{ .under }}</p>
+        <ul>
+          {{ range .links }}
+          <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .tekst }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </div>
+
+    <div class="lov-boks">
+      <h2>Satser og beløbsgrænser efter skattelov</h2>
+      <p class="under">Direkte adgang til Skatteministeriets satser for hver enkelt lov, altid med de gældende beløb.</p>
+      <ul class="lov-liste">
+        {{ range hugo.Data.skattelove }}
+        <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .navn }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+{{ end }}

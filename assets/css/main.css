@@ -1,0 +1,308 @@
+/* ══════════════════════════════════════════
+   Revisionskontoret i Horsens — main.css
+   Palette fra logoet: rød #D72E27 · sort #1A1819
+   ══════════════════════════════════════════ */
+
+/* ── Fonte (selv-hostede) ──────────────── */
+@font-face{
+  font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;
+  src:url('/fonts/inter-var.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Lora';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url('/fonts/lora-var.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Lora';font-style:italic;font-weight:400 700;font-display:swap;
+  src:url('/fonts/lora-italic-var.woff2') format('woff2');
+}
+
+:root{
+  --kridt:#FBFAF8;
+  --papir:#F4F1EC;
+  --blaek:#1A1819;
+  --roed:#D72E27;
+  --roed-moerk:#B02320;
+  --roed-lys:#F2655F;
+  --linje:#E0DCD6;
+  --dis:#5D5A57;
+  --maxw:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--kridt);
+  color:var(--blaek);
+  line-height:1.65;
+  font-size:18px;
+}
+h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:500;line-height:1.18}
+a{color:var(--roed)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--roed);outline-offset:3px;border-radius:2px}
+img{max-width:100%;height:auto}
+picture{display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ── Skip-link ─────────────────────────── */
+.skip{position:absolute;left:-9999px;top:0;background:var(--blaek);color:var(--kridt);padding:10px 18px;z-index:100;font-weight:700}
+.skip:focus{left:0}
+
+/* ── Top-linje ─────────────────────────── */
+.topline{background:var(--blaek);color:var(--kridt);font-size:15px}
+.topline .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+.topline a{color:var(--kridt);text-decoration:none;font-weight:700}
+.topline a:hover{color:var(--roed-lys)}
+
+/* ── Navigation ────────────────────────── */
+header{position:sticky;top:0;z-index:50;background:rgba(251,250,248,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--linje)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:var(--maxw);margin:0 auto;gap:16px}
+.logo{display:flex;align-items:center;gap:14px;line-height:0}
+.logo .logo-r{height:52px;width:auto}
+.logo .logo-tekst{height:20px;width:auto}
+.navlinks{display:flex;gap:30px;list-style:none;align-items:center}
+.navlinks a{text-decoration:none;color:var(--blaek);font-size:16px;font-weight:500}
+.navlinks a:hover{color:var(--roed)}
+.navlinks a.aktiv{color:var(--roed);font-weight:700;border-bottom:2px solid var(--roed);padding-bottom:2px}
+.nav-cta{background:var(--roed);color:#fff!important;padding:11px 22px;border-radius:3px;font-weight:700}
+.nav-cta:hover{background:var(--roed-moerk);color:#fff!important}
+.nav-cta.aktiv{border-bottom:none;background:var(--roed-moerk)}
+.burger{display:none;background:none;border:1px solid var(--linje);border-radius:3px;padding:10px 14px;font-size:22px;cursor:pointer;color:var(--blaek)}
+
+/* ── Hero (forside) ────────────────────── */
+.hero{padding:72px 0 64px;border-bottom:3px double var(--linje)}
+.hero .eyebrow,.side-hoved .eyebrow{font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--roed);font-weight:700;margin-bottom:22px}
+.hero h1{font-size:clamp(36px,5.4vw,62px);max-width:16ch}
+.hero h1 em{font-style:italic;color:var(--roed)}
+.hero p{max-width:56ch;margin-top:26px;font-size:21px;color:var(--dis)}
+.hero-actions{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:17px;padding:15px 30px;border-radius:3px;transition:background .15s}
+.btn-primary{background:var(--roed);color:#fff}
+.btn-primary:hover{background:var(--roed-moerk)}
+.btn-ghost{border:1.5px solid var(--blaek);color:var(--blaek)}
+.btn-ghost:hover{background:var(--blaek);color:var(--kridt)}
+.hero-fakta{margin-top:52px;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0 56px;border-top:1px solid var(--linje)}
+.hero-fakta div{padding-top:20px}
+.hero-fakta strong{font-family:'Lora',Georgia,serif;font-size:34px;display:block;color:var(--roed)}
+.hero-fakta span{font-size:15px;color:var(--dis)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-foto{position:relative}
+.hero-foto img{width:100%;height:100%;min-height:460px;object-fit:cover;border-radius:4px;border:1px solid var(--linje);box-shadow:0 3px 0 var(--linje)}
+.hero-foto figcaption{position:absolute;left:14px;bottom:14px;background:var(--blaek);color:var(--kridt);font-size:14px;padding:7px 14px;border-radius:3px}
+
+/* ── Side-hoved (undersider) ───────────── */
+.side-hoved{padding:56px 0 44px;border-bottom:3px double var(--linje)}
+.side-hoved h1{font-size:clamp(32px,4.8vw,52px)}
+.side-hoved .manchet{max-width:60ch;margin-top:18px;font-size:21px;color:var(--dis)}
+
+/* ── Sektioner + kontobog-overskrifter ─── */
+section{padding:64px 0}
+.s-papir{background:var(--papir);border-top:1px solid var(--linje);border-bottom:1px solid var(--linje)}
+.konto-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+.konto-head h2{font-size:clamp(27px,3.8vw,38px);white-space:nowrap}
+.konto-head::after{content:"";flex:1;border-top:3px double var(--linje);transform:translateY(-6px)}
+.konto-head .nr{font-size:14px;letter-spacing:.14em;color:var(--roed);font-weight:700}
+.laes-mere{margin-top:32px}
+.laes-mere a{font-weight:700;text-decoration:none;font-size:18px}
+.laes-mere a:hover{text-decoration:underline}
+
+/* ── Om os ─────────────────────────────── */
+.om-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
+.om-grid p+p{margin-top:18px}
+.villa-kort{background:#fff;border:1px solid var(--linje);border-radius:4px;padding:32px;box-shadow:0 2px 0 var(--linje)}
+.villa-kort h3{font-size:21px;margin-bottom:14px}
+.villa-kort p{font-size:16px;color:var(--dis)}
+.villa-kort p+p{margin-top:12px}
+.villa-kort .adresse{font-weight:700;color:var(--blaek);margin-top:14px;font-size:18px}
+.villa-kort a{font-weight:700}
+
+/* ── Ydelser som kontoplan ─────────────── */
+.kontoplan{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 64px;border-top:1px dotted var(--linje)}
+.kontoplan li{padding:15px 0;border-bottom:1px dotted var(--linje);font-size:18px}
+.kontoplan .linje{display:flex;align-items:baseline;gap:10px}
+.kontoplan .titel{font-weight:700;white-space:nowrap}
+.kontoplan a.titel{color:var(--blaek);text-decoration:none}
+.kontoplan a.titel:hover{color:var(--roed);text-decoration:underline}
+.kontoplan .leder{flex:1;border-bottom:1px dotted #C9C4BD;transform:translateY(-4px)}
+.kontoplan .note{color:var(--dis);font-size:16px;text-align:right;max-width:46%}
+.kerne{margin-bottom:40px;max-width:64ch}
+.kerne p{font-size:20px}
+.kerne strong{color:var(--roed)}
+.kontoplan .beskrivelse{margin-top:8px;font-size:16px;color:var(--dis)}
+
+/* ── Medarbejdere ──────────────────────── */
+.folk{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.person{background:#fff;border:1px solid var(--linje);border-radius:4px;padding:28px;box-shadow:0 2px 0 var(--linje)}
+.person h3{font-size:21px}
+.person .rolle{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--roed);font-weight:700;margin:5px 0 14px}
+.person p{font-size:16px;color:var(--dis)}
+.person .fakta{font-size:15px;color:var(--blaek);margin-bottom:12px}
+.person .specialer{list-style:none;font-size:15px;color:var(--dis);margin-top:6px}
+.person .specialer li{padding:4px 0;border-bottom:1px dotted var(--linje)}
+.person .label{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--roed);font-weight:700;margin-top:16px}
+.person .foto{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;border-radius:4px;border:1px solid var(--linje);margin-bottom:20px;background:var(--kridt)}
+.person.job{background:var(--kridt);border:1.5px dashed var(--roed);box-shadow:none;display:flex;flex-direction:column;justify-content:center}
+.person.job .foto{width:140px;height:140px;aspect-ratio:auto;border-radius:50%;border:3px dashed var(--roed);object-fit:contain;padding:8px;margin:0 0 18px}
+.citat{font-family:'Lora',Georgia,serif;font-style:italic;font-size:22px;color:var(--roed);margin:-20px 0 32px}
+
+/* ── Nyttig information ────────────────── */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.info-boks{background:#fff;border:1px solid var(--linje);border-radius:4px;padding:30px;box-shadow:0 2px 0 var(--linje)}
+.info-boks h2,.info-boks h3{font-size:20px;margin-bottom:8px}
+.info-boks .under{font-size:15px;color:var(--dis);margin-bottom:16px}
+.info-boks ul{list-style:none}
+.info-boks li{padding:9px 0;border-bottom:1px dotted var(--linje);font-size:16px}
+.info-boks li:last-child{border-bottom:none}
+.info-boks a{text-decoration:none;font-weight:500}
+.info-boks a:hover{text-decoration:underline}
+
+/* ── Skattelove (information) ──────────── */
+.lov-boks{background:#fff;border:1px solid var(--linje);border-radius:4px;padding:30px;box-shadow:0 2px 0 var(--linje);margin-top:28px}
+.lov-boks h2{font-size:20px;margin-bottom:8px}
+.lov-boks .under{font-size:15px;color:var(--dis);margin-bottom:16px}
+.lov-liste{list-style:none;columns:3;column-gap:40px}
+.lov-liste li{padding:7px 0;border-bottom:1px dotted var(--linje);font-size:15px;break-inside:avoid}
+.lov-liste a{text-decoration:none;font-weight:500}
+.lov-liste a:hover{text-decoration:underline}
+@media (max-width:860px){.lov-liste{columns:1}}
+
+/* ── Kontakt + åbningstider ────────────── */
+.kontakt{background:var(--blaek);color:var(--kridt)}
+.kontakt .konto-head::after{border-color:#3B3737}
+.kontakt .konto-head .nr{color:var(--roed-lys)}
+.kontakt-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.tider{width:100%;border-collapse:collapse;font-size:17px}
+.tider td{padding:13px 0;border-bottom:1px dotted #3B3737}
+.tider td:last-child{text-align:right;font-weight:700}
+.tider .note td{font-size:15px;color:#A9A5A2;font-weight:400;text-align:left;border-bottom:none;padding-top:16px}
+.kontakt h2,.kontakt h3{color:#fff}
+.kontakt h3{font-size:21px;margin-bottom:20px}
+.kontakt-info p{margin-bottom:12px;font-size:17px}
+.kontakt-info .tel{font-family:'Lora',Georgia,serif;font-size:44px;color:#fff;text-decoration:none;display:inline-block;margin:4px 0 16px}
+.kontakt-info .tel:hover{color:var(--roed-lys)}
+.kontakt-info a{color:var(--roed-lys)}
+.kontakt-info .stille{color:#A9A5A2;font-size:15px}
+
+/* ── Kort (klik-for-at-indlæse) ────────── */
+.kort-holder{margin-top:44px;border:1px solid var(--linje);border-radius:4px;background:#fff;box-shadow:0 2px 0 var(--linje);overflow:hidden}
+.kort-pladsholder{padding:56px 24px;text-align:center}
+.kort-pladsholder h3{font-size:21px;margin-bottom:10px}
+.kort-pladsholder .btn{margin:14px 0 6px}
+.kort-note{font-size:14px;color:var(--dis);max-width:52ch;margin:0 auto}
+.kort-note a{font-weight:700}
+.kort-holder iframe{display:block;width:100%;height:440px;border:0}
+@media (max-width:860px){.kort-holder iframe{height:320px}}
+
+/* ── Ring-bånd (CTA på undersider) ─────── */
+.ring-band{background:var(--roed);color:#fff;padding:52px 0}
+.ring-band .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.ring-band h2{font-size:clamp(24px,3.4vw,32px);color:#fff}
+.ring-band p{color:rgba(255,255,255,.85);margin-top:8px;font-size:18px}
+.ring-band .btn{background:#fff;color:var(--blaek)}
+.ring-band .btn:hover{background:var(--kridt)}
+.ring-band a:focus-visible{outline-color:#fff}
+
+/* ── Nyheder ───────────────────────────── */
+.nyheds-liste{display:grid;gap:24px;max-width:840px;margin:0 auto}
+.nyheds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.nyhed-kort{background:#fff;border:1px solid var(--linje);border-radius:4px;padding:28px 30px;box-shadow:0 2px 0 var(--linje)}
+.nyhed-kort time,.nyhed-kort .dato{display:block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--roed);font-weight:700}
+.kilde-note{color:var(--dis);font-size:16px;margin:-20px 0 28px}
+.nyheds-afsnit{margin-top:56px}
+.nyhed-kort h2,.nyhed-kort h3{font-size:22px;margin:8px 0 10px}
+.nyhed-kort h3{font-size:20px}
+.nyhed-kort h2 a,.nyhed-kort h3 a{color:var(--blaek);text-decoration:none}
+.nyhed-kort h2 a:hover,.nyhed-kort h3 a:hover{color:var(--roed)}
+.nyhed-kort p{color:var(--dis);font-size:16px}
+.nyhed-kort .mere{display:inline-block;margin-top:14px;font-weight:700;text-decoration:none}
+.nyhed-kort .mere:hover{text-decoration:underline}
+.ingen-nyheder{color:var(--dis);font-size:18px}
+.nyhed-tilbage{margin-top:36px}
+.nyhed-tilbage a{font-weight:700;text-decoration:none}
+.nyhed-tilbage a:hover{text-decoration:underline}
+
+/* ── Persondatapolitik / prosa ─────────── */
+.prosa{max-width:780px;margin:0 auto}
+.prosa h2{font-size:25px;margin:40px 0 14px}
+.prosa h3{font-size:20px;margin:30px 0 10px}
+.prosa p+p{margin-top:16px}
+.prosa ul{margin:14px 0 0 22px}
+.prosa li{margin-bottom:9px}
+.prosa p,.prosa li{color:var(--dis);font-size:17px}
+.prosa h2:first-child{margin-top:0}
+
+/* ── Billeder ──────────────────────────── */
+.galleri{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.galleri figure{margin:0}
+.galleri img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;border:1px solid var(--linje);box-shadow:0 2px 0 var(--linje)}
+.galleri figcaption{font-size:14px;color:var(--dis);margin-top:9px}
+.fdr-logo{display:block;height:48px;width:auto;background:#fff;padding:6px;border-radius:4px;border:1px solid var(--linje);margin-bottom:10px}
+.footer-logo{height:56px;width:auto;margin-bottom:14px;display:block}
+
+/* ── 404 ───────────────────────────────── */
+.fejlside{padding:110px 0;text-align:center}
+.fejlside .nr404{font-family:'Lora',Georgia,serif;font-size:clamp(90px,16vw,180px);color:var(--linje);line-height:1}
+.fejlside h1{font-size:clamp(26px,4vw,38px);margin:12px 0 18px}
+.fejlside p{color:var(--dis);max-width:48ch;margin:0 auto 34px}
+
+/* ── Footer ────────────────────────────── */
+footer{padding:52px 0 40px;font-size:15px;color:var(--dis);background:var(--papir);border-top:1px solid var(--linje)}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px}
+footer h4{font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--roed);margin-bottom:12px}
+footer a{color:var(--dis)}
+footer a:hover{color:var(--roed)}
+footer p+p{margin-top:10px}
+.cookie{max-width:44ch}
+.footer-bund{grid-column:1/-1;border-top:1px dotted var(--linje);padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ── Utility (CSP tillader ikke inline styles) ── */
+.u-mt0{margin-top:0}
+.u-mt16{margin-top:16px}
+.u-center{justify-content:center}
+
+/* ── Responsivt ────────────────────────── */
+@media (max-width:860px){
+  body{font-size:17px}
+  .logo{gap:10px}
+  .logo .logo-r{height:42px}
+  .logo .logo-tekst{height:16px}
+  .om-grid,.kontakt-grid{grid-template-columns:1fr;gap:40px}
+  .folk,.info-grid,.nyheds-grid{grid-template-columns:1fr}
+  .kontoplan{grid-template-columns:1fr}
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:var(--kridt);flex-direction:column;gap:0;border-bottom:1px solid var(--linje);padding:8px 0;align-items:stretch}
+  .navlinks.open{display:flex}
+  .navlinks li{padding:0}
+  .navlinks a{display:block;padding:15px 24px;font-size:18px}
+  .navlinks a.aktiv{border-bottom:none;border-left:3px solid var(--roed);padding-left:21px}
+  .nav-cta{margin:10px 24px;text-align:center}
+  .burger{display:block}
+  .kontoplan .note{display:none}
+  section{padding:48px 0}
+  .hero{padding:48px 0 44px}
+  .hero p{font-size:19px}
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .hero-foto img{min-height:300px}
+  .hero-fakta{grid-template-columns:repeat(3,1fr);gap:0 18px}
+  .hero-fakta div{padding-top:16px}
+  .hero-fakta strong{font-size:30px}
+  .hero-fakta span{font-size:14px}
+  .side-hoved{padding:40px 0 36px}
+  .side-hoved .manchet{font-size:19px}
+  .galleri{grid-template-columns:1fr;gap:24px}
+  .galleri img{aspect-ratio:3/2}
+  .person .foto{max-width:420px}
+  .citat{margin-top:0}
+  .kontakt-info .tel{font-size:44px}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .wrap{padding:0 20px}
+  nav{padding:12px 20px}
+  .hero-actions .btn{flex:1 1 100%;text-align:center}
+  .ring-band .btn{flex:1 1 100%;text-align:center}
+  .konto-head h2{white-space:normal}
+}

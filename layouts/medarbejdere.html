@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    <p class="citat u-mt0">"Vi er bedre, end vi ser ud!"</p>
+    <div class="folk">
+      {{ range hugo.Data.medarbejdere }}
+      <article class="person">
+        {{ partial "billede.html" (dict "src" .foto "alt" (printf "%s, %s" .navn (lower .rolle)) "class" "foto" "fill" "640x640") }}
+        <h3>{{ .navn }}</h3>
+        <p class="rolle">{{ .rolle }}</p>
+        <p class="fakta">{{ delimit .fakta " · " }}</p>
+        <p class="label">Specialer</p>
+        <ul class="specialer">
+          {{ range .specialer }}<li>{{ . }}</li>{{ end }}
+        </ul>
+        {{ with .tillidserhverv }}
+        <p class="label">Tillidserhverv</p>
+        <p>{{ . }}</p>
+        {{ end }}
+      </article>
+      {{ end }}
+      <article class="person job">
+        {{ partial "billede.html" (dict "src" "kommende-medarbejder.png" "alt" "Silhuet af en kommende medarbejder" "class" "foto" "fill" "225x225") }}
+        <h3>Er du vores næste medarbejder?</h3>
+        <p class="rolle">Vi søger løbende</p>
+        <p>Send os gerne en motiveret ansøgning på <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>, eller ring på <a href="tel:{{ site.Params.telefonLink }}">{{ site.Params.telefon }}</a> og hør nærmere.</p>
+      </article>
+    </div>
+  </div>
+</section>
+{{ end }}

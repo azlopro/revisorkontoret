@@ -1,0 +1,60 @@
+kerne: >
+  Størstedelen af vores opgaver består af **revision, bogføring, regnskab,
+  skat og moms**. Det er alt det, de fleste forbinder
+  med en revisor. Herudover assisterer vi med:
+
+liste:
+  - titel: Generationsskifte
+    anker: generationsskifte
+    note: Planlægning og gennemførelse
+    beskrivelse: >
+      Et generationsskifte kræver god tid og en gennemtænkt plan, både
+      skattemæssigt og menneskeligt. Vi hjælper med at tilrettelægge og
+      gennemføre skiftet, så virksomheden kommer godt videre til næste led.
+  - titel: Stiftelse af selskaber
+    anker: stiftelse-af-selskaber
+    note: ApS, A/S og holdingstrukturer
+    beskrivelse: >
+      Vi rådgiver om valg af selskabsform og står for det praktiske ved
+      stiftelse af ApS, A/S og holdingselskaber, fra vedtægter til
+      registrering hos Erhvervsstyrelsen.
+  - titel: Opstart af virksomhed
+    anker: opstart-af-virksomhed
+    note: Fra idé til første regnskab
+    beskrivelse: >
+      Skal du i gang som selvstændig? Vi hjælper med registrering, valg af
+      virksomhedsform, momsregistrering og en fornuftig opsætning af
+      bogholderiet, så du kommer rigtigt fra start.
+  - titel: Budgettering
+    anker: budgettering
+    note: Drifts- og likviditetsbudgetter
+    beskrivelse: >
+      Et realistisk budget er det bedste styringsværktøj, du kan få. Vi
+      udarbejder drifts- og likviditetsbudgetter, fx til banken eller til
+      din egen løbende opfølgning.
+  - titel: Skattesager
+    anker: skattesager
+    note: Dialog med Skattestyrelsen
+    beskrivelse: >
+      Har du fået en henvendelse fra Skattestyrelsen, eller er du uenig i en
+      afgørelse? Vi fører dialogen med myndighederne og sørger for, at din
+      sag bliver fremstillet korrekt og fyldestgørende.
+  - titel: Lønadministration
+    anker: loenadministration
+    note: Løn, indberetning og ferie
+    beskrivelse: >
+      Vi tager os af lønkørsel, indberetning til Skattestyrelsen, ferie og
+      alt det andet, der følger med at have ansatte. Til tiden, hver gang.
+  - titel: Alkoholbevilling
+    anker: alkoholbevilling
+    note: Ansøgning og dokumentation
+    beskrivelse: >
+      Restauration eller café? Vi hjælper med ansøgning om alkoholbevilling,
+      herunder den økonomiske dokumentation, som bevillingsmyndigheden
+      kræver.
+  - titel: Økonomisk rådgivning
+    anker: oekonomisk-raadgivning
+    note: Løbende sparring med ledelsen
+    beskrivelse: >
+      Gennem tæt samarbejde og økonomisk sparring med virksomhedens ledelse
+      arbejder vi for at udvikle og forbedre din forretning, år efter år.

@@ -1,0 +1,18 @@
+{{- /*
+  Henter FDR's nyhedsfeed på byggetidspunktet (samme kilde som det gamle site
+  brugte client-side). Returnerer en slice af poster med post_title,
+  post_excerpt, post_date og post_link, eller en tom slice, hvis feedet
+  ikke kan nås, så bygget aldrig fejler.
+*/ -}}
+{{- $poster := slice }}
+{{- $url := "https://fdr.dk/wp-json/fcp/v1/get-posts?slug=fdr_feed" }}
+{{- with try (resources.GetRemote $url) }}
+  {{- with .Err }}
+    {{- warnf "FDR-feed kunne ikke hentes (%s), nyhedssektionen bygges uden FDR-nyheder" . }}
+  {{- else with .Value }}
+    {{- with .Content | transform.Unmarshal }}{{ $poster = . }}{{ end }}
+  {{- else }}
+    {{- warnf "FDR-feed gav intet svar (%s)" $url }}
+  {{- end }}
+{{- end }}
+{{- return $poster }}

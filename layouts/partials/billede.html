@@ -1,0 +1,33 @@
+{{- /*
+  Responsivt billede med webp + fallback.
+  Params: src, alt, class, loading (lazy|eager), sizes, widths (slice), fill (fx "384x384")
+*/ -}}
+{{- $img := resources.Get (printf "billeder/%s" .src) }}
+{{- if not $img }}{{ errorf "Billede ikke fundet: %s" .src }}{{ end }}
+{{- $alt := .alt }}
+{{- $class := .class | default "" }}
+{{- $loading := .loading | default "lazy" }}
+{{- $sizes := .sizes | default "100vw" }}
+{{- if .fill }}
+  {{- $webp := $img.Fill (printf "%s webp Top" .fill) }}
+  {{- $fallback := $img.Fill (printf "%s Top" .fill) }}
+<picture{{ with $class }} class="{{ . }}-ramme"{{ end }}>
+  <source type="image/webp" srcset="{{ $webp.RelPermalink }}">
+  <img src="{{ $fallback.RelPermalink }}" width="{{ $fallback.Width }}" height="{{ $fallback.Height }}" alt="{{ $alt }}" loading="{{ $loading }}" decoding="async"{{ with $class }} class="{{ . }}"{{ end }}>
+</picture>
+{{- else }}
+  {{- $widths := .widths | default (slice 480 800 1200) }}
+  {{- $kandidater := slice }}
+  {{- range $w := $widths }}{{ if le $w $img.Width }}{{ $kandidater = $kandidater | append $w }}{{ end }}{{ end }}
+  {{- if not $kandidater }}{{ $kandidater = slice $img.Width }}{{ end }}
+  {{- $webpSet := slice }}
+  {{- range $w := $kandidater }}
+    {{- $r := $img.Resize (printf "%dx webp" $w) }}
+    {{- $webpSet = $webpSet | append (printf "%s %dw" $r.RelPermalink $w) }}
+  {{- end }}
+  {{- $fallback := $img.Resize (printf "%dx" (index $kandidater (sub (len $kandidater) 1))) }}
+<picture{{ with $class }} class="{{ . }}-ramme"{{ end }}>
+  <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" sizes="{{ $sizes }}">
+  <img src="{{ $fallback.RelPermalink }}" width="{{ $fallback.Width }}" height="{{ $fallback.Height }}" alt="{{ $alt }}" loading="{{ $loading }}"{{ if eq $loading "eager" }} fetchpriority="high"{{ else }} decoding="async"{{ end }}{{ with $class }} class="{{ . }}"{{ end }}>
+</picture>
+{{- end }}

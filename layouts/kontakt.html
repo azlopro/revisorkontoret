@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="kontakt">
+  <div class="wrap">
+    {{ partial "kontakt-grid.html" . }}
+  </div>
+</section>
+
+<section class="s-papir">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">Find os</span><h2>Den hvide villa</h2></div>
+    <div class="om-grid">
+      <div>
+        <p>Du finder os i den hvide patriciervilla på hjørnet af Sønderbrogade og Jyllandsgade, lige overfor den hvide kirke. Der er parkering i gården med indkørsel fra Jyllandsgade.</p>
+        <p class="u-mt16"><a href="https://maps.google.com/?q=S%C3%B8nderbrogade+43,+8700+Horsens" target="_blank" rel="noopener"><strong>Åbn rutevejledning i Google Maps →</strong></a></p>
+      </div>
+      <figure class="hero-foto">
+        {{ partial "billede.html" (dict "src" "hus-indkoersel.jpg" "alt" "Indkørslen til parkering i gården fra Jyllandsgade" "sizes" "(max-width: 860px) 100vw, 40vw") }}
+        <figcaption>Indkørsel til gården fra Jyllandsgade</figcaption>
+      </figure>
+    </div>
+    <div class="kort-holder" id="kort-holder">
+      <div class="kort-pladsholder">
+        <h3>Kort over Sønderbrogade 43</h3>
+        <p class="kort-note">Kortet kommer fra Google Maps og indlæses først, når du klikker. Google kan sætte cookies, når kortet vises.</p>
+        <button type="button" class="btn btn-primary" id="indlaes-kort">Vis kort fra Google Maps</button>
+        <p class="kort-note"><a href="https://maps.google.com/?q=S%C3%B8nderbrogade+43,+8700+Horsens" target="_blank" rel="noopener">Eller åbn direkte i Google Maps →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -62,3 +62,7 @@ disableKinds = ["taxonomy", "term", "rss"]
 
 [sitemap]
   changefreq = "monthly"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'

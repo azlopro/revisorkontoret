@@ -8,7 +8,13 @@
 // fordi wrangler deploy leder efter en Workers-entry (src/index.ts) og ikke
 // forstår et statisk assets-output på et Pages-projekt.
 //
-// I Cloudflare-dashboardet (Workers & Pages → revision-horsens-dk → Settings → Build):
+// OBS: "name" herunder SKAL matche det faktiske projektnavn i Cloudflare-dashboardet.
+// Hos Riishoej-sitet viste det sig at Cloudflare havde navngivet projektet efter selve
+// GitHub-repoet ("risshoej"), ikke det navn vi først gættede på ("riishoej-dk") — tjek
+// derfor navnet under Workers & Pages i dashboardet og ret linjen nedenfor til at matche,
+// hvis det ikke allerede er "revision-horsens-dk".
+//
+// I Cloudflare-dashboardet (Workers & Pages → [projektnavn, se ovenfor] → Settings → Build):
 //   Build command:   hugo --gc --minify
 //   Deploy command:  npx wrangler pages deploy public
 //   Env-variabel:    HUGO_VERSION = 0.163.2
@@ -25,5 +31,6 @@
 // Preview: X-Robots-Tag noindex i static/_headers — FJERNES ved go-live.
 {
   "name": "revision-horsens-dk",
-  "compatibility_date": "2026-07-17"
+  "compatibility_date": "2026-07-17",
+  "pages_build_output_dir": "public"
 }

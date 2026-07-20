@@ -1,5 +1,5 @@
 {
-  "name": "revisionskontoret",
+  "name": "revisorkontoret",
   "compatibility_date": "2026-06-19",
   "build": {
     "command": "chmod a+x build.sh && ./build.sh"

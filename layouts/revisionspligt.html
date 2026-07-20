@@ -1,0 +1,146 @@
+{{ define "main" }}
+{{ $d := hugo.Data.revisionspligt }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    {{ with .Params.kortsvar }}
+    <div class="kort-svar">
+      <p class="kort-svar-maerkat">Kort svar</p>
+      <p>{{ . }}</p>
+    </div>
+    {{ end }}
+
+    {{/* ── Interaktivt værktøj ── */}}
+    <div class="tjekker" id="tjekker">
+      <fieldset class="trin" data-trin="1">
+        <legend><span class="trin-nr">1</span> Hvilken type virksomhed?</legend>
+        <label class="valg"><input type="radio" name="form" value="personlig"> Personligt ejet — enkeltmandsvirksomhed eller I/S</label>
+        <label class="valg"><input type="radio" name="form" value="klasseB"> Selskab i regnskabsklasse B — fx ApS eller mindre A/S</label>
+        <label class="valg"><input type="radio" name="form" value="klasseCD"> Mellemstor eller stor virksomhed — regnskabsklasse C eller D</label>
+        <label class="valg"><input type="radio" name="form" value="finansiel"> Finansiel, reguleret eller børsnoteret virksomhed</label>
+      </fieldset>
+
+      <fieldset class="trin skjul" data-trin="2">
+        <legend><span class="trin-nr">2</span> De tre størrelsesgrænser</legend>
+        <p class="trin-hjaelp">Svar for jeres <strong>to seneste regnskabsår</strong>. Overskrider I grænsen i begge år?</p>
+        <div class="jn-spm">
+          <span>Balancesum over {{ $d.graenser.balancesum }}?</span>
+          <span class="jn"><label><input type="radio" name="g1" value="ja"> Ja</label><label><input type="radio" name="g1" value="nej"> Nej</label></span>
+        </div>
+        <div class="jn-spm">
+          <span>Nettoomsætning over {{ $d.graenser.omsaetning }}?</span>
+          <span class="jn"><label><input type="radio" name="g2" value="ja"> Ja</label><label><input type="radio" name="g2" value="nej"> Nej</label></span>
+        </div>
+        <div class="jn-spm">
+          <span>Mere end {{ $d.graenser.ansatte }}?</span>
+          <span class="jn"><label><input type="radio" name="g3" value="ja"> Ja</label><label><input type="radio" name="g3" value="nej"> Nej</label></span>
+        </div>
+        <label class="valg nystiftet-valg"><input type="checkbox" name="nystiftet"> Vi er i vores første regnskabsår</label>
+      </fieldset>
+
+      <fieldset class="trin skjul" data-trin="3">
+        <legend><span class="trin-nr">3</span> Særlige forhold</legend>
+        <div class="jn-spm">
+          <span>Balancesum over {{ $d.balanceloft }} i begge de to år?</span>
+          <span class="jn"><label><input type="radio" name="loft" value="ja"> Ja</label><label><input type="radio" name="loft" value="nej"> Nej</label></span>
+        </div>
+        <div class="jn-spm">
+          <span>Har selskabet kapitalinteresser i andre virksomheder (fx datterselskaber)?</span>
+          <span class="jn"><label><input type="radio" name="koncern" value="ja"> Ja</label><label><input type="radio" name="koncern" value="nej"> Nej</label></span>
+        </div>
+        <div class="jn-spm">
+          <span>Er I i en klassificeret risikobranche <em>og</em> har en nettoomsætning over {{ $d.risikoomsaetning }} i to år?</span>
+          <span class="jn"><label><input type="radio" name="risiko" value="ja"> Ja</label><label><input type="radio" name="risiko" value="nej"> Nej</label><label><input type="radio" name="risiko" value="ved-ikke"> Ved ikke</label></span>
+        </div>
+        <details class="risiko-hjaelp">
+          <summary>Hvad er en risikobranche?</summary>
+          <p>Erhvervsstyrelsen har udpeget en række brancher med forhøjet risiko for fejl og svig — bl.a. dele af restauration, byggeri, transport og detailhandel. Listen fremgår af {{ $d.risikobekendtgoerelse }}. Er du i tvivl, så vælg “Ved ikke”, så tager vi den sammen.</p>
+        </details>
+      </fieldset>
+
+      <div class="tjekker-knapper">
+        <button type="button" class="btn btn-primary" id="beregn">Vis mit svar</button>
+        <button type="button" class="btn btn-ghost skjul" id="nulstil">Start forfra</button>
+      </div>
+
+      <div class="resultat skjul" id="resultat" role="status" aria-live="polite"></div>
+      <noscript><p class="tjekker-noscript">Værktøjet kræver JavaScript. Du kan i stedet læse reglerne herunder — eller ringe til os på {{ $d.aar }} … <a href="tel:{{ site.Params.telefonLink }}">{{ site.Params.telefon }}</a>.</p></noscript>
+    </div>
+
+    {{/* Resultattekster som JSON-datablok (ikke eksekverbart script → CSP-sikkert) */}}
+    {{ $tel := printf "tel:%s" site.Params.telefonLink }}
+    {{ $mail := printf "mailto:%s" site.Params.email }}
+    {{ $tekster := dict
+      "forbehold" "Svaret er vejledende og erstatter ikke konkret rådgivning. Er du i tvivl, så ring — så ser vi på jeres konkrete situation."
+      "tel" $tel "telTekst" (printf "Ring %s" site.Params.telefon) "mail" $mail
+      "maerkat" (dict "pligt" "Revisionspligt" "fravalg" "Kan fravælges" "delvis" "Delvist fravalg" "ingen" "Ingen revisionspligt")
+      "note" (dict
+        "koncern" "<strong>Bemærk — koncern:</strong> Fordi selskabet har kapitalinteresser i andre virksomheder, skal størrelsesgrænserne opgøres samlet for hele koncernen (§ 135, stk. 4). Det kræver en konkret vurdering — den laver vi gerne for jer."
+        "risiko-usikker" "<strong>Bemærk:</strong> Er I i tvivl om, hvorvidt I er i en klassificeret risikobranche, kan svaret ændre sig. Ring, så tjekker vi det sammen."
+        "nystiftet" "I har angivet, at I er nystiftede. For det første regnskabsår vurderes grænserne på det år alene.")
+      "personlig" (dict
+        "titel" "Nej — din virksomhed har som udgangspunkt ikke revisionspligt"
+        "tekst" "<p>Personligt ejede virksomheder (enkeltmandsvirksomhed og I/S) aflægger ikke årsrapport efter årsregnskabsloven og skal derfor ikke revideres. Vælger I frivilligt at aflægge årsrapport i regnskabsklasse A, gælder særlige regler.</p>"
+        "lov" "")
+      "klasseCD" (dict
+        "titel" "Ja — jeres virksomhed har revisionspligt"
+        "tekst" "<p>Mellemstore og store virksomheder (regnskabsklasse C og D) skal altid have deres årsregnskab revideret. Fravalg af revision er ikke muligt.</p>"
+        "lov" "Årsregnskabsloven § 135, stk. 1")
+      "finansiel" (dict
+        "titel" "Ja — jeres virksomhed har revisionspligt"
+        "tekst" "<p>Finansielle, regulerede og børsnoterede virksomheder skal altid revideres og kan ikke fravælge revision.</p>"
+        "lov" "Årsregnskabsloven § 135 m.fl.")
+      "loft" (dict
+        "titel" "Ja — jeres selskab har revisionspligt"
+        "tekst" "<p>Når balancesummen overstiger 50 mio. kr. i to på hinanden følgende regnskabsår, bortfalder retten til at fravælge revision — uanset de øvrige grænser.</p>"
+        "lov" "Årsregnskabsloven § 135, stk. 2")
+      "to-af-tre" (dict
+        "titel" "Ja — jeres selskab har revisionspligt"
+        "tekst" "<p>I overskrider mindst to af de tre størrelsesgrænser i to år i træk og kan derfor ikke fravælge revision. Vi hjælper gerne med revisionen — og med at gøre den så enkel som muligt for jer.</p>"
+        "lov" "Årsregnskabsloven § 135")
+      "fravalg" (dict
+        "titel" "Nej — jeres selskab kan fravælge revision"
+        "tekst" "<p>I holder jer under mindst to af de tre grænser i to år i træk. I kan lovligt fravælge revision på generalforsamlingen og få det ført ind i vedtægterne. Overvej dog, om banken og jeres samarbejdspartnere sætter pris på et revideret regnskab — vi rådgiver gerne om en fornuftig mellemvej som udvidet gennemgang.</p>"
+        "lov" "Årsregnskabsloven § 135")
+      "risikobranche" (dict
+        "titel" "Delvist — I kan fravælge revision, men skal have en revisorerklæring"
+        "tekst" "<p>Jeres selskab holder sig under grænserne, men fordi I er i en klassificeret risikobranche med en nettoomsætning over 5 mio. kr. i to år, skal årsregnskabet forsynes med en revisorerklæring (assistance eller erklæring med sikkerhed). Det klarer vi for jer.</p>"
+        "lov" "Årsregnskabsloven § 135, stk. 5")
+    }}
+    <script type="application/json" id="revisionspligt-tekster">{{ $tekster | jsonify | safeJS }}</script>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="prosa revp-prosa">
+      {{ .Content }}
+      <div class="revp-kilder">
+        <h2>Kilder</h2>
+        <ul>
+          {{ range $d.kilder }}<li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .tekst }}</a></li>{{ end }}
+        </ul>
+        <p class="revp-opdateret">Gældende regler pr. {{ $d.aar }}. Senest gennemgået {{ (time $d.opdateret).Format "2. januar 2006" }}.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{/* Schema: WebApplication (værktøjet) + BreadcrumbList */}}
+{{- $app := dict
+  "@context" "https://schema.org" "@type" "WebApplication"
+  "name" "Revisionspligt-tjekker" "url" .Permalink
+  "applicationCategory" "BusinessApplication" "operatingSystem" "Web"
+  "description" .Description "inLanguage" "da-DK" "isAccessibleForFree" true
+  "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "DKK")
+  "provider" (dict "@id" (printf "%s#kontoret" site.Home.Permalink)) }}
+<script type="application/ld+json">{{ $app | jsonify | safeJS }}</script>
+{{- $krumme := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" (slice
+    (dict "@type" "ListItem" "position" 1 "name" "Forside" "item" site.Home.Permalink)
+    (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink)) }}
+<script type="application/ld+json">{{ $krumme | jsonify | safeJS }}</script>
+
+{{ $js := resources.Get "js/revisionspligt.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}

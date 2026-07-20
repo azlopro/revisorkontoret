@@ -1,0 +1,17 @@
+# Kundeudtalelser til forsiden.
+#
+# Sektionen vises KUN, når der ligger mindst én rigtig udtalelse her — så længe
+# listen er tom, står der ingenting på siden. Indsæt aldrig opdigtede citater;
+# brug kun udtalelser, I har fået lov til at citere.
+#
+# Fjern kommentar-tegnene og udfyld, når I har fået citater fra kunder:
+#
+# udtalelser:
+#   - citat: "De forklarer tingene, så man forstår dem, og der er altid en at ringe til."
+#     navn: Fornavn Efternavn
+#     firma: Virksomhedens navn, Horsens
+#   - citat: "Vi har været kunder i over 20 år og er aldrig blevet svigtet."
+#     navn: Fornavn Efternavn
+#     firma: Branche, by
+
+udtalelser: []

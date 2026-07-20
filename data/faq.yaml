@@ -1,0 +1,50 @@
+# Ofte stillede spørgsmål — bruges af partials/faq.html til både visning og FAQPage-schema.
+# Skriv altid det korte, direkte svar først (det er dét, Google og AI-assistenter udtrækker),
+# og uddyb bagefter. Hold svarene faktuelt korrekte og opdaterede.
+
+- sp: Hvad koster en revisor?
+  svar: >
+    Prisen afhænger af opgavens omfang og af, hvor godt bogføringen er ført.
+    Et årsregnskab for en mindre virksomhed ligger typisk fra nogle tusinde
+    til et par titusinde kroner. Vi giver altid en fast pris på forhånd, så
+    der ikke kommer overraskelser. Ring på 75 64 72 22, så giver vi dig et
+    uforpligtende overslag ud fra din konkrete situation.
+
+- sp: Hvornår har min virksomhed revisionspligt?
+  svar: >
+    Små virksomheder kan som udgangspunkt fravælge revision, hvis de to
+    regnskabsår i træk ligger under to af disse tre grænser: en balancesum på
+    4 mio. kr., en nettoomsætning på 8 mio. kr. og 12 fuldtidsansatte.
+    Holdingselskaber og enkelte brancher har skærpede regler. Vi vurderer
+    gerne, om netop din virksomhed er omfattet.
+  link: /revisionspligt/
+  linkTekst: "Tjek din revisionspligt på et minut →"
+
+- sp: Hvad er fristen for at indsende årsrapporten?
+  svar: >
+    Årsrapporten skal indberettes til Erhvervsstyrelsen senest seks måneder
+    efter regnskabsårets afslutning. Følger dit regnskabsår kalenderåret, er
+    fristen altså den 30. juni. Vi holder styr på din frist, så du undgår
+    afgifter for for sen indberetning.
+
+- sp: Hvad er forskellen på en revisor og en bogholder?
+  svar: >
+    En bogholder registrerer virksomhedens daglige bilag og transaktioner.
+    En revisor bygger ovenpå: vi udarbejder og kvalitetssikrer årsregnskabet,
+    rådgiver om skat og selskabsforhold og kan afgive en revisionspåtegning,
+    der giver banken og myndighederne sikkerhed for tallene. Hos os kan du få
+    begge dele samme sted.
+
+- sp: Skal jeg selv bogføre, eller kan I gøre det for mig?
+  svar: >
+    Begge dele. Nogle kunder fører selv det daglige bogholderi i fx e-conomic
+    eller Dinero, hvorefter vi laver moms og årsregnskab. Andre lader os stå
+    for det hele. Vi tilpasser samarbejdet efter, hvad der giver bedst mening
+    for dig — og hjælper gerne med at komme godt fra start.
+
+- sp: Tager I imod nye kunder, og hvad koster det at skifte revisor?
+  svar: >
+    Ja, vi tager løbende imod nye kunder — både virksomheder, selvstændige og
+    private. Selve skiftet er nemt og koster ikke noget hos os: vi kontakter
+    din nuværende revisor og henter det materiale, vi skal bruge. Du skal blot
+    ringe eller skrive, så tager vi hånd om resten.

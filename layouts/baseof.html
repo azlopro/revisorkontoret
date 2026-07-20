@@ -36,6 +36,11 @@
 
 {{ partial "footer.html" . }}
 
+<div class="mobil-cta" aria-label="Hurtig kontakt">
+  <a class="ring" href="tel:{{ site.Params.telefonLink }}">Ring {{ site.Params.telefon }}</a>
+  <a class="skriv" href="mailto:{{ site.Params.email }}">Skriv til os</a>
+</div>
+
 {{ $js := resources.Get "js/menu.js" | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 </body>

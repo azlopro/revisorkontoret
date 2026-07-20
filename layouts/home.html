@@ -3,13 +3,18 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Registreret revisor · Horsens</p>
-      <h1>Revisoren man kan <em>tale med</em> og forstå.</h1>
-      <p>Vi har hjulpet små og mellemstore virksomheder med revision, regnskab og rådgivning siden {{ site.Params.etableret }}. Det hele foregår fra den hvide patriciervilla på Sønderbrogade, lige i hjertet af Horsens. Uden unødige fagudtryk, og uden at det går ud over fagligheden.</p>
+      <p class="eyebrow">Registreret revisor i Horsens · siden {{ site.Params.etableret }}</p>
+      <h1>Din revisor i Horsens — <em>en du kan tale med</em> og forstå.</h1>
+      <p>Revision, regnskab, skat og rådgivning til små og mellemstore virksomheder — fra den hvide villa på Sønderbrogade. Fast, personlig kontakt til de samme tre mennesker, år efter år. Uden unødige fagudtryk, og uden at det går ud over fagligheden.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="tel:{{ site.Params.telefonLink }}">Ring {{ site.Params.telefon }}</a>
-        <a class="btn btn-ghost" href="{{ (site.GetPage "/ydelser").RelPermalink }}">Se hvad vi hjælper med</a>
+        <a class="btn btn-ghost" href="mailto:{{ site.Params.email }}">Skriv til os</a>
       </div>
+      <p class="hero-sekundaer"><a href="{{ (site.GetPage "/ydelser").RelPermalink }}">Se hvad vi hjælper med →</a></p>
+      <p class="hero-tillid">
+        {{- with resources.Get "billeder/fdr-logo.png" }}<img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Foreningen Danske Revisorer" loading="eager">{{ end -}}
+        <span>Medlem af <strong>Foreningen Danske Revisorer</strong> — vores registrerede revisor er samtidig kvalitetskontrollant for FDR.</span>
+      </p>
       <div class="hero-fakta">
         <div><strong>{{ site.Params.etableret }}</strong><span>Etableret i Horsens</span></div>
         <div><strong>60+ år</strong><span>Erfaring med SMV'er</span></div>
@@ -53,7 +58,7 @@
       {{ range hugo.Data.ydelser.liste }}
       <li>
         <div class="linje">
-          <a class="titel" href="{{ (site.GetPage "/ydelser").RelPermalink }}#{{ .anker }}">{{ .titel }}</a>
+          <a class="titel" href="{{ (site.GetPage "/ydelser").RelPermalink }}{{ .anker }}/">{{ .titel }}</a>
           <span class="leder"></span>
           <span class="note">{{ .note }}</span>
         </div>
@@ -81,6 +86,8 @@
     <p class="laes-mere"><a href="{{ (site.GetPage "/medarbejdere").RelPermalink }}">Mød hele holdet →</a></p>
   </div>
 </section>
+
+{{ partial "udtalelser.html" . }}
 
 {{ $fdr := partialCached "fdr-feed.html" "fdr" }}
 {{ $nyhedsside := site.GetPage "/nyheder" }}
@@ -125,9 +132,11 @@
 {{ end }}
 {{ end }}
 
+{{ partial "faq.html" (dict "baggrund" "s-papir" "nr" "05") }}
+
 <section id="kontakt" class="kontakt">
   <div class="wrap">
-    <div class="konto-head"><span class="nr">05</span><h2>Kontakt og åbningstider</h2></div>
+    <div class="konto-head"><span class="nr">06</span><h2>Kontakt og åbningstider</h2></div>
     {{ partial "kontakt-grid.html" . }}
   </div>
 </section>

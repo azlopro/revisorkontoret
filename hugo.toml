@@ -17,6 +17,12 @@ disableKinds = ["taxonomy", "term", "rss"]
   bank = "Ringkjøbing Landbobank · Reg. 7670 · Konto 0008930765"
   etableret = "1964"
   linkedin = "https://www.linkedin.com/company/revisionskontoret-i-horsens"
+  # Koordinater til JSON-LD (geo). VERIFICÉR mod Google Maps før go-live — disse er
+  # et estimat for Sønderbrogade 43 og bør erstattes med den præcise pin fra GBP.
+  geoBredde = "55.8577"
+  geoLaengde = "9.8503"
+  # Ekstra profiler til schema sameAs (styrker entiteten). Tilføj URL'er, når de er bekræftede:
+  # profiler = ["https://www.google.com/maps/place/...", "https://www.krak.dk/...", "https://www.proff.dk/..."]
 
 [[menus.main]]
   name = "Om kontoret"

@@ -1,0 +1,36 @@
+{{- /*
+  FAQ-sektion med FAQPage-schema. Data fra data/faq.yaml.
+  Ren HTML (details/summary) — ingen JS, ingen cookies, valid CSP.
+  Valgfri param via dict: "baggrund" (fx "s-papir"), "titel", "nr".
+  Kald: {{ partial "faq.html" (dict "baggrund" "s-papir") }}  eller  {{ partial "faq.html" . }}
+*/ -}}
+{{- $ctx := . }}
+{{- $baggrund := "s-papir" }}{{ $titel := "Ofte stillede spørgsmål" }}{{ $nr := "FAQ" }}
+{{- if reflect.IsMap . }}
+  {{- $baggrund = .baggrund | default "s-papir" }}
+  {{- $titel = .titel | default "Ofte stillede spørgsmål" }}
+  {{- $nr = .nr | default "FAQ" }}
+{{- end }}
+{{- $faq := hugo.Data.faq }}
+{{- if $faq }}
+<section id="faq" class="{{ $baggrund }}">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">{{ $nr }}</span><h2>{{ $titel }}</h2></div>
+    <div class="faq-liste">
+      {{- range $faq }}
+      <details class="faq-item">
+        <summary>{{ .sp }}</summary>
+        <div class="faq-svar"><p>{{ .svar }}</p>
+        {{- if .link }}<p class="faq-link"><a href="{{ .link }}">{{ .linkTekst | default "Læs mere →" }}</a></p>{{ end -}}
+        </div>
+      </details>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- $ents := slice }}
+{{- range $faq }}
+  {{- $ents = $ents | append (dict "@type" "Question" "name" .sp "acceptedAnswer" (dict "@type" "Answer" "text" (.svar | plainify | chomp))) }}
+{{- end }}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $ents) | jsonify | safeJS }}</script>
+{{- end }}

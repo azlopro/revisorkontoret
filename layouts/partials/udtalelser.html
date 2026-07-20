@@ -1,0 +1,21 @@
+{{- /*
+  Kundeudtalelser — vises kun, hvis der findes rigtige citater i data/udtalelser.yaml.
+  Ingen rating-/Review-schema (Google tillader ikke egne selvbetjente stjerner for
+  LocalBusiness — de rigtige anmeldelser hører hjemme på Google Business Profile).
+*/ -}}
+{{- $u := hugo.Data.udtalelser.udtalelser }}
+{{- with $u }}
+<section id="udtalelser" class="udtalelser-sektion">
+  <div class="wrap">
+    <div class="konto-head"><span class="nr">Kunder</span><h2>Det siger kunderne</h2></div>
+    <div class="udtalelser">
+      {{- range . }}
+      <figure class="udtalelse">
+        <blockquote>{{ .citat }}</blockquote>
+        <figcaption>{{ .navn }}{{ with .firma }} · <span>{{ . }}</span>{{ end }}</figcaption>
+      </figure>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}

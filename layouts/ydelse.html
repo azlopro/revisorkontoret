@@ -1,0 +1,58 @@
+{{ define "main" }}
+{{ partial "side-hoved.html" . }}
+
+<section class="s-papir">
+  <div class="wrap">
+    <div class="ydelse-layout">
+      <article class="prosa ydelse-prosa">
+        {{ .Content }}
+        <p class="ydelse-cta">
+          <a class="btn btn-primary" href="tel:{{ site.Params.telefonLink }}">Ring {{ site.Params.telefon }}</a>
+          <a class="btn btn-ghost" href="mailto:{{ site.Params.email }}">Skriv til os</a>
+        </p>
+      </article>
+
+      <aside class="ydelse-side">
+        <div class="villa-kort">
+          <h3>Andre ydelser</h3>
+          <ul class="ydelse-liste">
+            {{ range (where .Parent.Pages "Type" "ydelser").ByWeight }}
+              {{ if ne .RelPermalink $.RelPermalink }}
+              <li><a href="{{ .RelPermalink }}">{{ .Params.linkText | default .Title }}</a></li>
+              {{ end }}
+            {{ end }}
+          </ul>
+          <p class="laes-mere"><a href="{{ .Parent.RelPermalink }}">Alle ydelser →</a></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{{/* Service-schema — knyttet til AccountingService-entiteten via provider @id */}}
+{{- $svc := dict
+  "@context" "https://schema.org"
+  "@type" "Service"
+  "name" (.Params.serviceNavn | default .Title)
+  "serviceType" (.Params.serviceNavn | default .Title)
+  "description" (.Params.kort | default .Description)
+  "url" .Permalink
+  "provider" (dict "@id" (printf "%s#kontoret" site.Home.Permalink))
+  "areaServed" (slice
+    (dict "@type" "City" "name" "Horsens")
+    (dict "@type" "City" "name" "Brædstrup")
+    (dict "@type" "City" "name" "Hedensted")
+    (dict "@type" "AdministrativeArea" "name" "Østjylland"))
+}}
+<script type="application/ld+json">{{ $svc | jsonify | safeJS }}</script>
+{{/* Brødkrumme */}}
+{{- $krumme := dict
+  "@context" "https://schema.org"
+  "@type" "BreadcrumbList"
+  "itemListElement" (slice
+    (dict "@type" "ListItem" "position" 1 "name" "Forside" "item" site.Home.Permalink)
+    (dict "@type" "ListItem" "position" 2 "name" "Ydelser" "item" .Parent.Permalink)
+    (dict "@type" "ListItem" "position" 3 "name" .Title "item" .Permalink))
+}}
+<script type="application/ld+json">{{ $krumme | jsonify | safeJS }}</script>
+{{ end }}

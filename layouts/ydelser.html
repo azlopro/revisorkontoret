@@ -10,14 +10,16 @@
       {{ range hugo.Data.ydelser.liste }}
       <li id="{{ .anker }}">
         <div class="linje">
-          <span class="titel">{{ .titel }}</span>
+          <a class="titel" href="{{ (site.GetPage "/ydelser").RelPermalink }}{{ .anker }}/">{{ .titel }}</a>
           <span class="leder"></span>
           <span class="note">{{ .note }}</span>
         </div>
-        <p class="beskrivelse">{{ .beskrivelse }}</p>
+        <p class="beskrivelse">{{ .beskrivelse }} <a class="mere-inline" href="{{ (site.GetPage "/ydelser").RelPermalink }}{{ .anker }}/">Læs mere →</a></p>
       </li>
       {{ end }}
     </ul>
   </div>
 </section>
+
+{{ partial "faq.html" (dict "baggrund" "" "nr" "FAQ") }}
 {{ end }}

@@ -1,0 +1,17 @@
+# Tal og kilder til revisionspligt-tjekkeren. Ét sted at opdatere, når reglerne ændrer sig.
+# Grænserne indsættes i spørgsmålsteksterne (layout) — JavaScript tæller kun ja/nej-svar,
+# så tallene lever KUN her. Opdatér "aar" og "opdateret", når I gennemgår reglerne.
+aar: "2026"
+opdateret: "2026-07-20"
+graenser:
+  balancesum: "4 mio. kr."
+  omsaetning: "8 mio. kr."
+  ansatte: "12 heltidsansatte i gennemsnit"
+balanceloft: "50 mio. kr."
+risikoomsaetning: "5 mio. kr."
+risikobekendtgoerelse: "bekendtgørelse nr. 1488 af 27. november 2025"
+kilder:
+  - tekst: "Årsregnskabsloven § 135 (danskelove.dk)"
+    url: "https://danskelove.dk/%C3%A5rsregnskabsloven/135"
+  - tekst: "Erhvervsstyrelsens vejledning om årsrapporter"
+    url: "https://erhvervsstyrelsen.dk/vejledning-aarsrapporter"

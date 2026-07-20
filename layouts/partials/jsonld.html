@@ -1,4 +1,11 @@
 {{- $billede := "" }}{{ with resources.Get "billeder/hus.jpg" }}{{ $billede = .Permalink }}{{ end }}
+{{- $logo := "" }}{{ with resources.Get "billeder/logo-fuld.png" }}{{ $logo = .Permalink }}{{ end }}
+{{- /* Medarbejdere som Person-entiteter (E-E-A-T / entitetssignal) — hentes fra data/medarbejdere.yaml */ -}}
+{{- $ansatte := slice }}
+{{- range hugo.Data.medarbejdere }}{{ $ansatte = $ansatte | append (dict "@type" "Person" "name" .navn "jobTitle" .rolle) }}{{ end }}
+{{- /* sameAs: LinkedIn + evt. flere profiler (GBP, Krak, Proff) sat i hugo.toml [params] profiler */ -}}
+{{- $sameAs := slice site.Params.linkedin }}
+{{- with site.Params.profiler }}{{ range . }}{{ $sameAs = $sameAs | append . }}{{ end }}{{ end }}
 {{- $skema := dict
   "@context" "https://schema.org"
   "@type" "AccountingService"
@@ -6,22 +13,38 @@
   "name" site.Title
   "description" site.Params.beskrivelse
   "url" site.Home.Permalink
+  "logo" $logo
   "telephone" (printf "+45 %s" site.Params.telefon)
   "email" site.Params.email
   "foundingDate" site.Params.etableret
   "vatID" "DK27607764"
+  "priceRange" "$$"
+  "currenciesAccepted" "DKK"
   "image" $billede
+  "hasMap" "https://maps.google.com/?q=S%C3%B8nderbrogade+43,+8700+Horsens"
   "address" (dict
     "@type" "PostalAddress"
     "streetAddress" site.Params.adresse
     "postalCode" "8700"
     "addressLocality" "Horsens"
+    "addressRegion" "Region Midtjylland"
     "addressCountry" "DK")
   "openingHoursSpecification" (slice
     (dict "@type" "OpeningHoursSpecification" "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday") "opens" "09:00" "closes" "17:00")
     (dict "@type" "OpeningHoursSpecification" "dayOfWeek" "Friday" "opens" "09:00" "closes" "16:30"))
-  "sameAs" (slice site.Params.linkedin)
+  "sameAs" $sameAs
+  "employee" $ansatte
   "memberOf" (dict "@type" "Organization" "name" "Foreningen Danske Revisorer" "url" "https://www.fdr.dk")
-  "areaServed" "Horsens og omegn"
+  "knowsAbout" (slice "Revision" "Bogføring" "Regnskab" "Skat" "Moms" "Generationsskifte" "Selskabsstiftelse" "Budgettering" "Lønadministration")
+  "areaServed" (slice
+    (dict "@type" "City" "name" "Horsens")
+    (dict "@type" "City" "name" "Brædstrup")
+    (dict "@type" "City" "name" "Hedensted")
+    (dict "@type" "City" "name" "Gedved")
+    (dict "@type" "AdministrativeArea" "name" "Østjylland"))
 }}
+{{- /* geo kun med, hvis koordinater er sat i hugo.toml [params] — undgår at sende forkerte data */ -}}
+{{- if and site.Params.geoBredde site.Params.geoLaengde }}
+  {{- $skema = merge $skema (dict "geo" (dict "@type" "GeoCoordinates" "latitude" site.Params.geoBredde "longitude" site.Params.geoLaengde)) }}
+{{- end }}
 <script type="application/ld+json">{{ $skema | jsonify | safeJS }}</script>
